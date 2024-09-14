@@ -37,5 +37,4 @@ def login(
     access_token = create_access_token(
         data={"sub": user.username}
     )
-
     return user_schemas.Token(access_token=access_token)
