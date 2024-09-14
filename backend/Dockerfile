@@ -12,4 +12,5 @@ COPY ./alembic/ /code/alembic/
 
 COPY ./app/ /code/app/
 
-CMD [ "fastapi", "run", "app/main.py", "--port", "80" ]
+# CMD [ "fastapi", "run", "app/main.py", "--port", "80" ]
+

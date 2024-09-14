@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class TaskBase(BaseModel):
@@ -15,11 +15,9 @@ class TaskUpdate(TaskBase):
     is_done: bool = False
 
 class Task(TaskBase):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     created_at: datetime
     updated_at: datetime
     is_done: bool = False
-
-
-    class Config:
-        from_attributes = True

@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from app import schemas, models
+from app import models
+from app.schemas import task
 
 
 def get_task(db: Session, task_id: int):
@@ -10,7 +11,7 @@ def get_tasks(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Task).offset(skip).limit(limit).all()
 
 
-def create_task(db: Session, task: schemas.Task):
+def create_task(db: Session, task: task.Task):
     task_in_db = models.Task(**task.model_dump())
     db.add(task_in_db)
     db.commit()
@@ -21,7 +22,7 @@ def create_task(db: Session, task: schemas.Task):
 def update_task(
         db: Session,
         task_in_db: models.Task,
-        updated_task: schemas.TaskUpdate
+        updated_task: task.TaskUpdate
     ):
     task_dict = updated_task.model_dump(exclude_unset=True)
     for key, value in task_dict.items():
